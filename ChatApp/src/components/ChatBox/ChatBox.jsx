@@ -9,7 +9,7 @@ const ChatBox = () => {
         <img src={assets.profile_img} alt="" />
         <p>Richard sand <img src={assets.green_dot} alt="" /></p>
         <img src={assets.help_icon} className='help' alt="" />
-
+        <div className='new-update'></div>
       </div>
     </div>
   )
