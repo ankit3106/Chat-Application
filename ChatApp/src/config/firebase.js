@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,7 +28,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // create sign up function for user
-const signup = async (username, email, password) => {
+const signup = async (username, email, password) => { // create signup function
     // create user with email and password using try catch block
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -35,7 +36,7 @@ const signup = async (username, email, password) => {
 
         // store date in firestore
         // doc to provide reference of the database
-        await setDoc(doc(db, "users", user.uid), {
+        await setDoc(doc(db, "users", user.uid), { // setDoc to store data in firestore
             id: user.uid,
             username:username.toLowerCase(),
             email,
@@ -52,17 +53,25 @@ const signup = async (username, email, password) => {
 
     } catch (error) {  // If error occurs, catch the error
         console.error(error); 
-        toast.error(error.code); // Display error message using toast
+        toast.error(error.code.split('/')[1].split('-').join(' ')); // Display error message using toast
     }   
 }
-const login = async (email, password) => {
+const login = async (email, password) => { // create login function
     try {
         await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
         console.error(error);
-        toast.error(error.code);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
+    }
+}
+const logout = async () => { // create logout function
+    try {
+        await signOut(auth);
+    } catch (error) {
+        console.error(error);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
     }
 }
 
-export {signup , login}; // export the signup function
+export {signup , login, logout, auth, db}; // export the signup function
 
