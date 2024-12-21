@@ -14,7 +14,7 @@ const LeftSidebar = () => {
             </div>
             <div className="ls-search">
                 <img src={assets.search_icon} alt="" />
-                <input type="text" placeholder='Search here...' />
+                <input type="text" placeholder='Search' />
             </div>
         </div>
         <div className="ls-list">
