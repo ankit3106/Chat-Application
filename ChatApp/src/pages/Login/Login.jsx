@@ -1,19 +1,34 @@
 import React, { useState } from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
+import { signup , login } from '../../config/firebase'
+import { toast } from 'react-toastify'
 
 const Login = () => {
 
     const [currState, setCurrState] = React.useState("Sign up");
+    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault(); // Prevent from reloading the page
+        if(currState === "Sign up"){
+            signup(username, email, password); // Call signup function from firebase.js
+        }
+        else{
+            login(email, password); // Call login function from firebase.js
+        }
+    }
 
     return (
         <div className='login'>
             <img src={assets.logo_big} alt="" className='logo' />
-            <form className='login-form'>
+            <form onSubmit={onSubmitHandler} className='login-form'>
                 <h2>{currState}</h2>
-                {currState === "Sign up" ? <input type="text" placeholder='username' className='form-input' required /> : null}
-                <input type="email" placeholder='Email address' className='form-input' required />
-                <input type="password" placeholder='password' className='form-input' required />
+                {currState === "Sign up" ? <input onChange={(e)=>setUsername(e.target.value)} value={username} type="text" placeholder='username' className='form-input' required /> : null}
+                <input onChange={(e)=> setEmail(e.target.value)} value={email} type="email" placeholder='Email address' className='form-input' required />
+                <input onChange={(e)=> setPassword(e.target.value)} value={password} type="password" placeholder='password' className='form-input' required />
                 <button type='submit'>{currState === "Sign up" ? "Create account" : "Login now"}</button>
                 <div className="login-term">
                     <input type="checkbox" />
