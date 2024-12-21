@@ -15,6 +15,7 @@
     max-width: 140px;
 }
 .ls-nav .menu img{
+    max-width: 30px;
     max-height: 20px;
     opacity: 0.5;
     cursor: pointer;
@@ -25,8 +26,9 @@
     gap: 10px;
     margin-top: 15px;
     padding: 5px 20px;
-    background: #092969;
+    background: #0c2d6f;
     border-radius: 10px;
+    /* opacity: 80%; */
 }
 .ls-search img{
     max-height: 20px;
@@ -79,5 +81,36 @@
 .friends:hover span{
     color: white;
 }
+.ls-nav .menu{
+    position: relative;
+    padding: 10px 0px;
+}
+.menu .sub-menu{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 130px;
+    background-color: #092969;
+    border-radius: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: none;
+}
+.menu .sub-menu div p{
+    padding: 5px 20px 5px 20px;
+}
+.menu .sub-menu div{
+    display: flex;
+    cursor: pointer;
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+.menu .sub-menu div:hover{
+    background-color: #001030;
+}
+.menu:hover .sub-menu{
+    display: block;
+}
+
 
 
